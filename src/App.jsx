@@ -34,7 +34,7 @@ function App() {
   }
 
   // 모달페이지가 보이게/ 안보이게 작업하기 위한 스테이트
-  const [modal, setModal] = useState(true)
+  const [modal, setModal] = useState(false)
 
   return (
     <div className='App'>
@@ -52,11 +52,16 @@ function App() {
 
       <div className='list'>
         <div>
-          <h4>{title[0]}<span onClick={() => {
+          <h4 onClick={()=>{
+            setModal(true)
+          }}>{title[0]}
+            <span onClick={() => {
             const newLikes = [...like]
             newLikes[0]++
             setLike(newLikes)
-          }}>👍</span>{like[0]}
+          }}>👍
+          </span>{like[0]}
+
             {/* 변경 단추를 클릭하면 '남자코트 추천 -> 여자코트 추천'으로 변경 */}
             <button onClick={changeTitle}>변경</button>
           </h4>
