@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import './App.css'
 import Modal from './Modal';
+import Title from './Title';
+import Blog from './Blog';
 
 function App() {
 
@@ -19,13 +21,11 @@ function App() {
     '2025-7-1',
   ]);
 
-  // 디테일 배열 추가
-
-  const [details, setDetails ] = useState([
-    '심플한 디자인의 코트로 가을에 잘 어울림',
-    '강남 우동의 찐 맛집! 먹어보진 않았음',
-    '자바스터디는 말 만하고 못함',
-  ]);
+  const [details, setDetails] = useState([
+  '겨울에 입기 좋은 남자 코트 추천 모음',
+  '강남에서 진짜 맛있는 우동집',
+  '스터디 모임: 자바 기초부터 심화까지'
+]);
 
   // 좋아요 누름 숫자를 보관할 스테이트
   const [like, setLike] = useState([0,0,0]);
@@ -66,9 +66,7 @@ function App() {
 
   return (
     <div className='App'>
-      <div className='black-bg'>
-        React + Vite로 만드는 블로그
-      </div>
+        <Title />
       {/* <h4 style={{color: 'red', fontSize: '20px'}}>{post}</h4> */}
 
       {/* 타이틀 정렬하기 */}
@@ -76,32 +74,27 @@ function App() {
         const sortedTitle = [...title].sort()
         setTitle(sortedTitle);
       }}>글 정렬하기</button>
+      <Blog 
+      title = {title}
+      like = {like}
+      createDate = {createDate}
+      handleTitle = {handleTitle}
+      setLike = {setLike}
+      />
 
-      <div className='list'>
-        {title.map((item, index)=>{
-          return(
-            <div key={index}>
-              <h4 onClick={()=> handleTitle(index)}>
-                    {title[index]}
-                <span onClick={()=>{
-                  const newLikes = [... like]
-                  newLikes[index]++
-                  setLike(newLikes)
-                  }}>👍
-                </span>{like[index]} 
-              </h4>      
-              <p>작성일 : {createDate[index]}</p>
-            </div>  
-          )
-        })}           
-      </div>
+      {/* Modal 에 필요한 props 전달 */}
+      
 
       {/* 상세페이지 나타날 곳 */}
-      {modal ? <Modal color="lightblue" title={title}
-      currentIndex={currentIndex}
-      createDate={createDate} 
-      details={details}
-      />: null }
+      {modal ? (
+        <Modal
+          color="lightblue"
+          title={title}
+          currentIndex={currentIndex}
+          createDate={createDate}
+          details={details}
+        />
+      ) : null}
     </div>
   )
 }
