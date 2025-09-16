@@ -1,4 +1,4 @@
-function Blog({ title, like, createDate, handleTitle, setLike }) {
+function Blog({ title, like, createDate, details, handleTitle, setLike }) {
   return (
     <div className='list'>
       {title.map((item, index) => (
@@ -7,7 +7,7 @@ function Blog({ title, like, createDate, handleTitle, setLike }) {
             {item}
             <span
               onClick={(e) => {
-                e.stopPropagation(); // 제목 클릭과 좋아요 클릭 충돌 방지
+                e.stopPropagation();
                 const newLikes = [...like];
                 newLikes[index]++;
                 setLike(newLikes);
@@ -18,6 +18,7 @@ function Blog({ title, like, createDate, handleTitle, setLike }) {
             {like[index]}
           </h4>
           <p>작성일 : {createDate[index]}</p>
+          <p>내용 : {details[index]}</p>
         </div>
       ))}
     </div>
