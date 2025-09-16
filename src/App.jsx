@@ -23,6 +23,7 @@ function App() {
     '스터디 모임: 자바 기초부터 심화까지'
   ]);
 
+
   const [like, setLike] = useState([0, 0, 0]);
   const [modal, setModal] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(null);
@@ -68,6 +69,13 @@ function App() {
     setNewContent('');
   }
 
+  function deletePost(index) {
+  setTitle(title.filter((_, i) => i !== index));
+  setDetails(details.filter((_, i) => i !== index));
+  setCreateDate(createDate.filter((_, i) => i !== index));
+  setLike(like.filter((_, i) => i !== index));
+}
+
   return (
     <div className='App'>
       <Title />
@@ -86,6 +94,7 @@ function App() {
         details={details}
         handleTitle={handleTitle}
         setLike={setLike}
+        deletePost={deletePost}
       />
 
       {modal ? (
